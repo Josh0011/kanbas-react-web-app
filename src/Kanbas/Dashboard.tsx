@@ -5,10 +5,10 @@ export default function Dashboard() {
         <div id="wd-dashboard">
             <h1 id="wd-dashboard-title">Dashboard</h1>
             <hr/>
-            <h2 id="wd-dashboard-published">Published Courses (0)</h2>
+            <h2 id="wd-dashboard-published">Published Courses (7)</h2>
             <hr/>
             <div id="wd-dashboard-courses" className="row">
-                <div className="row row-cols-1 row-cols-md-5 g-4">
+                <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-3">
                     <div className="wd-dashboard-course col" style={{width: "300px"}}>
                         <div className="card rounded-3 overflow-hidden">
                             <Link
@@ -21,6 +21,9 @@ export default function Dashboard() {
                                     </h5>
                                     <p className="wd-dashboard-course-title card-text">
                                         Robots and AI
+                                    </p>
+                                    <p className="section">
+                                        Fall 2024 Section 1
                                     </p>
                                     <button className="btn btn-primary"> Go</button>
                                 </div>
@@ -40,6 +43,9 @@ export default function Dashboard() {
                                     <p className="wd-dashboard-course-title card-text">
                                         How To Be a Hero
                                     </p>
+                                    <p className="section">
+                                        Fall 2024 Section 1
+                                    </p>
                                     <button className="btn btn-primary"> Go</button>
                                 </div>
                             </Link>
@@ -57,6 +63,9 @@ export default function Dashboard() {
                                     </h5>
                                     <p className="wd-dashboard-course-title card-text">
                                         Introduction to Formal Tensor Calculus
+                                    </p>
+                                    <p className="section">
+                                        Fall 2024 Section 1
                                     </p>
                                     <button className="btn btn-primary"> Go</button>
                                 </div>
@@ -76,6 +85,9 @@ export default function Dashboard() {
                                     <p className="wd-dashboard-course-title card-text">
                                         Intro to Cosmology and Relativity
                                     </p>
+                                    <p className="section">
+                                        Fall 2024 Section 1
+                                    </p>
                                     <button className="btn btn-primary"> Go</button>
                                 </div>
                             </Link>
@@ -93,6 +105,9 @@ export default function Dashboard() {
                                     </h5>
                                     <p className="wd-dashboard-course-title card-text">
                                         Building, farming, and fighting
+                                    </p>
+                                    <p className="section">
+                                        Fall 2024 Section 1
                                     </p>
                                     <button className="btn btn-primary"> Go</button>
                                 </div>
@@ -112,6 +127,9 @@ export default function Dashboard() {
                                     <p className="wd-dashboard-course-title card-text">
                                         High Level Spirits and Spells
                                     </p>
+                                    <p className="section">
+                                        Fall 2024 Section 1
+                                    </p>
                                     <button className="btn btn-primary"> Go</button>
                                 </div>
                             </Link>
@@ -129,6 +147,9 @@ export default function Dashboard() {
                                     </h5>
                                     <p className="wd-dashboard-course-title card-text">
                                         Rock History from 100 AD
+                                    </p>
+                                    <p className="section">
+                                        Fall 2024 Section 1
                                     </p>
                                     <button className="btn btn-primary"> Go</button>
                                 </div>

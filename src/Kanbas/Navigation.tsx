@@ -4,10 +4,11 @@ import { IoCalendarOutline } from "react-icons/io5";
 import { LiaBookSolid, LiaCogSolid } from "react-icons/lia";
 import { FaInbox } from "react-icons/fa6";
 import { PiUserCircleDuotone } from "react-icons/pi";
+import { PiUserCircleLight } from "react-icons/pi";
 
 export default function KanbasNavigation() {
     return (
-        <div id="wd-kanbas-navigation" style={{width: 120}}
+        <div id="wd-kanbas-navigation" style={{width: 110}}
              className="list-group rounded-0 position-fixed
          bottom-0 top-0 d-none d-md-block bg-black z-2">
             <a id="wd-neu-link" target="_blank"
@@ -16,7 +17,7 @@ export default function KanbasNavigation() {
                 <img src="/images/NEU.png" width="75px"/></a>
             <NavLink to="/Kanbas/Account" id="wd-account-link"
                   className="list-group-item text-center border-0 bg-black text-white">
-                <PiUserCircleDuotone className="fs-1 text text-white"/><br/>
+                <PiUserCircleLight className="fs-1 text text-white"/><br/>
                 Account </NavLink>
             <NavLink to="/Kanbas/Dashboard" id="wd-dashboard-link"
                   className="list-group-item text-white

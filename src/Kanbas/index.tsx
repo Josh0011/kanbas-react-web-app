@@ -21,3 +21,4 @@ export default function Kanbas() {
             </div>
         </div>
     );}
+
