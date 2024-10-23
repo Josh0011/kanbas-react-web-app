@@ -16,10 +16,13 @@ export default function Courses() {
     return (
 
         <div id="wd-courses">
-            <h2 className="text-danger">
-                <FaAlignJustify className="me-3 fs-4 mb-1"/>
-                {course && course.name} &gt; {pathname.split("/")[4]}
-            </h2>
+            <div className="d-flex align-items-center">
+                <h2 className="text-danger">
+                    <FaAlignJustify className="me-3 fs-4 mb-1"/>
+                    {course && course.name} &gt; {pathname.split("/")[4]}
+                </h2>
+            </div>
+            <hr />
             <div className="d-flex">
                 <div className="d-none d-md-block">
                     <CoursesNavigation/>
