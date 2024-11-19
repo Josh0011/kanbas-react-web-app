@@ -6,6 +6,7 @@ import {FaInbox, FaRegCircleUser} from "react-icons/fa6";
 import { Link, useLocation } from "react-router-dom";
 import { PiUserCircleLight } from "react-icons/pi";
 
+
 export default function KanbasNavigation() {
     const { pathname } = useLocation();
     const links = [
