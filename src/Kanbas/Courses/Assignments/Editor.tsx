@@ -1,43 +1,55 @@
-import { useParams } from "react-router";
 import * as db from "../../Database";
 import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate, useParams } from "react-router-dom";
+import { addAssignment, updateAssignment } from "./reducer";
 
 export default function AssignmentEditor() {
-    const {cid, aid} = useParams();
-    const assignments = db.assignments;
-    let assignment = assignments.find((a) => a._id === aid);
-    if (!assignment) {
-        assignment = {
-            _id: aid || "",
-            course: cid || "",
+    const { cid, aid } = useParams();
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
+    const assignments = useSelector(
+        (state: any) => state.assignmentsReducer.assignments
+    );
+
+    const existingAssignment = assignments.find((a: any) => a._id === aid);
+
+    const [assignment, setAssignment] = useState(
+        existingAssignment || {
+            _id: aid || "TBD",
+            course: cid || "TBD",
             title: "",
-            points: "",
-            available: "",
-            due: "",
-        };
-    }
+            points: 100,
+            available: "01/1/2099",
+            due: "01/1/2099",
+        }
+    );
     return (
         <div id="wd-assignments-editor" className="container mt-4">
-            <div className="mb-4 float-end" style={{ width: "80%" }}>
+            <div className="mb-4 float-end" style={{width: "80%"}}>
                 <label htmlFor="wd-name" className="form-label">
                     Assignment Name
                 </label>
                 <input
                     type="text"
                     id="wd-name"
-                    value= {assignment.title}
+                    value={assignment.title}
                     className="form-control"
+                    onChange={(e) =>
+                        setAssignment({...assignment, title: e.target.value})
+                    }
                 />
             </div>
-            <div className="mb-4 float-end" style={{ width: "80%" }}>
+            <div className="mb-4 float-end" style={{width: "80%"}}>
         <textarea
             id="wd-name"
             value={""}
             className="form-control"
-            style={{ height: "200px" }}
+            style={{height: "200px"}}
         />
             </div>
-            <div className="row float-end" style={{ width: "80%" }}>
+            <div className="row float-end" style={{width: "80%"}}>
                 <div className="col-md-12">
                     <div className="d-flex flex-column align-items-end">
                         <div className="d-flex mb-3 w-100">
@@ -54,6 +66,12 @@ export default function AssignmentEditor() {
                                 className="form-control"
                                 style={{width: "70%"}}
                                 value={assignment.points}
+                                onChange={(e) =>
+                                    setAssignment({
+                                        ...assignment,
+                                        points: Number(e.target.value),
+                                    })
+                                }
                             />
                         </div>
                         <div className="d-flex mb-3 w-100">
@@ -67,7 +85,7 @@ export default function AssignmentEditor() {
                             <select
                                 id="wd-group"
                                 className="form-select"
-                                style={{ width: "70%" }}
+                                style={{width: "70%"}}
                             >
                                 <option value="ASSIGNMENTS">ASSIGNMENTS</option>
                                 <option value="QUIZZES">QUIZZES</option>
@@ -78,14 +96,14 @@ export default function AssignmentEditor() {
                             <label
                                 htmlFor="wd-display-grade-as"
                                 className="form-label me-3 w-25 text-end"
-                                style={{ whiteSpace: "nowrap" }}
+                                style={{whiteSpace: "nowrap"}}
                             >
                                 Display Grade as
                             </label>
                             <select
                                 id="wd-display-grade-as"
                                 className="form-select"
-                                style={{ width: "70%" }}
+                                style={{width: "70%"}}
                             >
                                 <option value="Percentage">Percentage</option>
                                 <option value="Points">Points</option>
@@ -96,11 +114,11 @@ export default function AssignmentEditor() {
                             <label
                                 htmlFor="wd-submission-type"
                                 className="form-label me-3 w-25 text-end"
-                                style={{ whiteSpace: "nowrap" }}
+                                style={{whiteSpace: "nowrap"}}
                             >
                                 Submission Type
                             </label>
-                            <div className="border p-3 mb-3" style={{ width: "70%" }}>
+                            <div className="border p-3 mb-3" style={{width: "70%"}}>
                                 <div className="d-flex mb-3">
                                     <select id="wd-submission-type" className="form-select mb-2">
                                         <option value="Online">Online</option>
@@ -181,11 +199,11 @@ export default function AssignmentEditor() {
                             <label
                                 htmlFor="wd-assign-to"
                                 className="form-label me-3 w-25 text-end"
-                                style={{ whiteSpace: "nowrap" }}
+                                style={{whiteSpace: "nowrap"}}
                             >
                                 Assign
                             </label>
-                            <div className="border p-3 mb-3" style={{ width: "70%" }}>
+                            <div className="border p-3 mb-3" style={{width: "70%"}}>
                                 <label htmlFor="wd-due-date" className="form-label fw-bold">
                                     Assign To
                                 </label>
@@ -206,6 +224,13 @@ export default function AssignmentEditor() {
                                         id="wd-due-date"
                                         className="form-control"
                                         value={assignment.due}
+                                        onChange={(e) => {
+                                            const due = e.target.value;
+                                            setAssignment({
+                                                ...assignment,
+                                                due,
+                                            });
+                                        }}
                                     />
                                 </div>
                                 <div className="row">
@@ -221,6 +246,13 @@ export default function AssignmentEditor() {
                                             id="wd-available-from"
                                             className="form-control"
                                             value={assignment.available}
+                                            onChange={(e) => {
+                                                const from = e.target.value;
+                                                setAssignment({
+                                                    ...assignment,
+                                                    from,
+                                                });
+                                            }}
                                         />
                                     </div>
                                     <div className="col">
@@ -242,23 +274,28 @@ export default function AssignmentEditor() {
                     </div>
                 </div>
             </div>
-            <hr className="float-end" style={{ width: "80%", marginTop: "30px" }} />
-            <div className="text-end float-end " style={{ width: "80%" }}>
-                <Link
-                    to={`/Kanbas/Courses/${cid}/Assignments`}
+            <hr className="float-end" style={{width: "80%", marginTop: "30px"}}/>
+            <div className="text-end float-end" style={{width: "80%"}}>
+                <button
+                    onClick={() => navigate(`/Kanbas/Courses/${cid}/Assignments`)}
                     className="btn btn-outline-secondary me-2"
                 >
                     Cancel
-                </Link>
-                <Link
-                    to={`/Kanbas/Courses/${cid}/Assignments`}
+                </button>
+                <button
+                    onClick={() => {
+                        if (existingAssignment) {
+                            dispatch(updateAssignment(assignment));
+                        } else {
+                            dispatch(addAssignment(assignment));
+                        }
+                        navigate(`/Kanbas/Courses/${cid}/Assignments`);
+                    }}
                     className="btn btn-danger"
-                    id="wd-save-create"
                 >
                     Save
-                </Link>
+                </button>
             </div>
         </div>
     );
 }
-
